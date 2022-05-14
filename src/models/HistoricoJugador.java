@@ -7,7 +7,7 @@ public class HistoricoJugador {
     private String ruta;
 
     public HistoricoJugador() {
-        this.ruta = "C:/Users/SERGIO/Documents/NetBeansProjects/PruebaPreguntas/historico.txt";
+        this.ruta = "C:/Users/SERGIO/Desktop/historico.txt";
     }
 
     public void guardarDatos(String datos) {
@@ -18,7 +18,7 @@ public class HistoricoJugador {
             escritura.close();
             escritor.close();
         } catch (Exception ex) {
-            System.out.println(ex.getStackTrace());
+            System.out.println(ex.getStackTrace().toString());
         }
     }
 
