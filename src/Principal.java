@@ -36,85 +36,52 @@ public class Principal {
         idPreguntas = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25));
         historico = new HistoricoJugador();
 
+        //obtenemos la hora actual
         DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
         Date date = new Date();
 
+        //obtenemos lista de preguntas
         objPregunta.ListQuestions();
+        //obtenemos lista de respuestas
         objOpciones.ListOptions();
 
         textoBienvenida();
-
         registroJugador();
 
-        //ArrayList<Preguntas> Listpreguntas = new ArrayList<>();
-        //listado de preguntas
         while (opcion != 3) {
-
-            /* for (Integer i : idPreguntas) {
-                System.out.println("preguntas que quedan:" + i);
-            }*/
             contador++;
-            //System.out.println("i vale " + contador);
-            //generamos la pregunta de la categoria 1
             if (contador <= 5) {
-
                 generarPregunta(1, 4, 0, 1);
-
                 almacenarOpciones();
-
                 mostrarMenuPregunta("1", "$2.000", "$10.000");
-                //usuario escoje respuesta,si opcion es a
                 dimeRespuestaCorrecta(2000);
-
             } //generamos la pregunta de la categoria 2
             else if (contador > 5 && contador <= 10) {
-
                 generarPregunta(6, 9, 5, 2);
-
                 almacenarOpciones();
-
                 mostrarMenuPregunta("2", "$4.000", "$20.000");
-
                 dimeRespuestaCorrecta(4000);
-
             } //generamos la pregunta de la categoria 3
             else if (contador > 10 && contador <= 15) {
-
                 generarPregunta(11, 14, 10, 3);
-
                 almacenarOpciones();
-
                 mostrarMenuPregunta("3", "$6.000", "$30.000");
-
                 dimeRespuestaCorrecta(6000);
-
             } //generamos la pregunta de la categoria 4
             else if (contador > 15 && contador <= 20) {
-
                 generarPregunta(16, 19, 15, 4);
-
                 almacenarOpciones();
-
                 mostrarMenuPregunta("4", "$8.000", "$40.000");
-
                 dimeRespuestaCorrecta(8000);
-
             } //generamos la pregunta de la categoria 5
             else if (contador > 20 && contador <= 25) {
-
                 generarPregunta(21, 24, 20, 5);
-
                 almacenarOpciones();
-
                 mostrarMenuPregunta("5", "$10.000", "$50.000");
-
                 dimeRespuestaCorrecta(10000);
-
                 if(contador == 25){
                     opcion = 3;
                 }
-
-
             }else{
                 System.out.println("Has ganado el juego");
                 System.out.println("Juego terminado, total ganado:" + premio);
@@ -123,16 +90,13 @@ public class Principal {
                 historico.guardarDatos(registroHistorico);
                 break;
             }
-
             if (opcion != 3) {
-
                 System.out.println("Desea seguir jugando?");
                 System.out.println("1. seguir jugando");
                 System.out.println("2. ver historico");
                 System.out.println("3. salir");
                 opcion = scan.nextInt();
             }
-
             if (opcion == 2) {
                 historico.leerDatos();
                 System.out.println("Desea seguir jugando?");
@@ -168,31 +132,18 @@ public class Principal {
     public static void generarPregunta(int numero, int max, int min, int categoria) {
 
         if (contador == numero) {
-            //System.out.println("entro en el si");
-            //int number = (int) (Math.random() * 4);
             Random random = new Random();
             int number = random.nextInt(max - min) + min;
             //System.out.println("numero ramdon es=" + (number));
             pregunta = objPregunta.ramdonPregunta(categoria, number + 1);
             ListOptions = objOpciones.optionsPreguntas(pregunta.getId());
-
             int pos = idPreguntas.indexOf(number + 1);
             idPreguntas.remove(pos);
-
-            /*if(numero !=1){
-                int pos = idPreguntas.indexOf(number + 1);
-                idPreguntas.remove(pos);
-            }else{
-                idPreguntas.remove(number);
-            }*/
         } else {
             //System.out.println("entro en el sino");
             for (Integer idPregunta : idPreguntas) {
-                //System.out.println("id pregunta:" + idPregunta);
                 pregunta = objPregunta.ramdonPregunta(categoria, idPregunta);
                 ListOptions = objOpciones.optionsPreguntas(pregunta.getId());
-                //int indexOfElement = idPreguntas.indexOf(idPregunta);
-                //System.out.println("indice elemento a borrar " + indexOfElement);
                 idPreguntas.remove(0);
                 break;
             }
@@ -221,7 +172,6 @@ public class Principal {
 
     public static void dimeRespuestaCorrecta(double valor) {
         if (opcionEscogida.equals("A")) {
-
             if (opcionA) {
                 premio += valor;
                 System.out.println("correcto!!,Total ganado " + premio);
@@ -229,9 +179,7 @@ public class Principal {
                 System.out.println("Incorrecto,Juego terminado");
                 premio = 0;
                 opcion = 3;
-
             }
-
         } else if (opcionEscogida.equals("B")) {
             if (opcionB) {
                 premio += valor;
@@ -240,7 +188,6 @@ public class Principal {
                 System.out.println("Incorrecto,Juego terminado");
                 premio = 0;
                 opcion = 3;
-
             }
         } else if (opcionEscogida.equals("C")) {
             if (opcionC) {
@@ -250,7 +197,6 @@ public class Principal {
                 System.out.println("Incorrecto,Juego terminado");
                 premio = 0;
                 opcion = 3;
-
             }
         } else if (opcionEscogida.equals("D")) {
             if (opcionD) {
@@ -267,6 +213,5 @@ public class Principal {
             opcion = 3;
         }
     }
-
 }
 
